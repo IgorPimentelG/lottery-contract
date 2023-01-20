@@ -25,12 +25,14 @@ contract Lottery {
         return false;
     }
 
-    function random(uint _module) private view returns (uint) {
-        address[] memory _players;
+    function random() private view returns (uint) {
+        require(players.length > 0, "There are no players!");
+        address[] memory _players = new address[](players.length);
         for (uint i = 0; i < players.length; i++) {
             _players[i] = players[i].wallet;
         }
-        return uint(keccak256(abi.encode(block.timestamp, block.difficulty, _players))) % _module;
+        uint randomNumber = uint(keccak256(abi.encode(block.timestamp, block.difficulty, _players)));
+        return randomNumber % players.length;
     } 
 
     function enter(string memory _name) public payable {
@@ -39,9 +41,8 @@ contract Lottery {
         players.push(Player(_name, payable(msg.sender))); 
     }
 
-    function pickWinner() public payable {
-        require(players.length > 0);
-        uint index = random(players.length);
+    function pickWinner() public {
+        uint index = random();
         players[index].wallet.transfer(address(this).balance);
         delete players;
     }
