@@ -51,12 +51,12 @@ contract Lottery {
         return address(this).balance;
     }
 
+    function getPlayers() public view returns (Player[] memory) {
+        return players;
+    }
+
     modifier restricted() {
         require(msg.sender == manager, "Admin only");
         _;
-    }
-
-    function getPlayers() public view returns (Player[] memory) {
-        return players;
     }
 }
