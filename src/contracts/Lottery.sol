@@ -56,7 +56,7 @@ contract Lottery {
         _;
     }
 
-    function getPlayers() public restricted view returns (Player[] memory) {
+    function getPlayers() public view returns (Player[] memory) {
         return players;
     }
 }

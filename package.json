@@ -4,20 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --p ./tsconfig.json && node ./build/compile.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && mocha ./build/test/**/*.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.18",
+    "@types/web3": "^1.2.2",
+    "chai": "^4.3.7",
     "dotenv": "^16.0.3",
-    "solc": "^0.8.17",
-    "tsc": "^2.0.4",
-    "typescript": "^4.9.4"
+    "ganache-cli": "^6.12.2",
+    "mocha": "^10.2.0",
+    "solc": "^0.8.17"
   },
   "dependencies": {
+    "@truffle/hdwallet-provider": "^2.1.5",
+    "tsc": "^2.0.4",
+    "typescript": "^4.9.4",
     "web3": "^1.8.1"
   }
 }

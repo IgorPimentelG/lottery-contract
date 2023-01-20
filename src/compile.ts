@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import * as solc from 'solc';
+const fs = require('fs');
+const path = require('path');
+const solc = require('solc');
 
 const lotteryPath = path.resolve('src', 'contracts', 'Lottery.sol');
 const source = fs.readFileSync(lotteryPath, 'utf8');
