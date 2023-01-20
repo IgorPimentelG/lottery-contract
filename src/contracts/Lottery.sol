@@ -41,7 +41,7 @@ contract Lottery {
         players.push(Player(_name, payable(msg.sender))); 
     }
 
-    function pickWinner() public {
+    function pickWinner() public restricted {
         uint index = random();
         players[index].wallet.transfer(address(this).balance);
         delete players;
@@ -49,5 +49,14 @@ contract Lottery {
 
     function getBalance() public view returns (uint) {
         return address(this).balance;
+    }
+
+    modifier restricted() {
+        require(msg.sender == manager, "Admin only");
+        _;
+    }
+
+    function getPlayers() public restricted view returns (Player[] memory) {
+        return players;
     }
 }
